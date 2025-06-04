@@ -1,27 +1,15 @@
 from pathlib import Path
 from fastapi import APIRouter
-from pydantic import BaseModel 
 from typing import Literal
-from app.backend.services.firestore_session_service import load_or_create_session, save_session
-from app.backend.core.llm_parser import detect_llm_flags, update_intent_state
-from app.backend.core.llm_client import prepare_llm_payload, generate_llm_response, format_flights_beautifully
-from app.backend.core.flight_engine import handle_search
+from app.backend.models.chat_session import ChatRequest, ChatResponse
+from app.backend.services.session_service import load_or_create_session, save_session
+from app.backend.services.llm_service import detect_llm_flags, update_intent_state
 
 
 # ─────────────────────────────────────────────
 # FASTAPI APPLICATION INITIALIZATION
 router = APIRouter()
 
-# ─────────────────────────────────────────────
-# DATA MODELS :
-class ChatRequest(BaseModel):
-    sessionId : str
-    query : str
-    currency : Literal["EUR", "USD", "MAD"] = "EUR"
-
-class ChatResponse(BaseModel):
-    sessionId : str
-    answer : str
 
 # ─────────────────────────────────────────────
 # DEFINITION OF THE CHAT ROUTE WITTH ALL ORCHESTRATION :

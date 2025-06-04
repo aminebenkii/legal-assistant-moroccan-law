@@ -2,7 +2,7 @@ from pathlib import Path
 from fastapi import FastAPI
 from fastapi.responses import FileResponse, JSONResponse
 from fastapi.staticfiles import StaticFiles
-from app.backend.api.chat_api import router
+from app.backend.api.routes import router
 from fastapi.middleware.cors import CORSMiddleware
 
 # ─────────────────────────────────────────────
