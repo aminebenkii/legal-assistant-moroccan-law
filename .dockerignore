@@ -1,0 +1,29 @@
+# Virtual Environnement Files :
+venv/
+__pycache__/
+*.pyc
+
+# API Keys, credentials jsons, Secrets : 
+.env
+#app/backend/credentials/
+
+# Git & Docker files : 
+.git/
+.gitignore
+Dockerfile
+.dockerignore
+
+# Docs
+README.md
+DevNotes.md
+
+# Tests
+tests/
+test.py
+
+# OS Stuff
+.DS_Store
+Thumbs.db
+
+# VS Code stuff
+.vscode
