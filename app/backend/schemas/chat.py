@@ -5,7 +5,6 @@ from pydantic import BaseModel
 class ChatRequest(BaseModel):
     sessionId : str
     query : str
-    currency : Literal["EUR", "USD", "MAD"] = "EUR"
 
 class ChatResponse(BaseModel):
     sessionId : str

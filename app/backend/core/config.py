@@ -1,4 +1,7 @@
-LLM_MODEL = "gpt-4.1" 
+LLM_MODEL = "gpt-4o-mini" 
+LLM_TEMPERATURE = 0.3
+LLM_MAX_TOKENS = 500
+
 
 LLM_PROMPT = """
 

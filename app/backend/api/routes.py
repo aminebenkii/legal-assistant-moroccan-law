@@ -1,10 +1,7 @@
-from pathlib import Path
 from fastapi import APIRouter
-from typing import Literal
-from app.backend.models.chat_session import ChatRequest, ChatResponse
+from app.backend.schemas.chat import ChatRequest, ChatResponse
 from app.backend.services.session_service import load_or_create_session, save_session
-from app.backend.services.llm_service import detect_llm_flags, update_intent_state
-
+from app.backend.services.llm_service import prepare_llm_payload, generate_llm_response
 
 # ─────────────────────────────────────────────
 # FASTAPI APPLICATION INITIALIZATION
@@ -23,7 +20,6 @@ def chat(request : ChatRequest):
     # Unpack incoming data
     session_id = request.sessionId
     user_query = request.query
-    currency = request.currency
     
     # Get or Create Session 
     session = load_or_create_session(session_id)
@@ -32,7 +28,7 @@ def chat(request : ChatRequest):
     session["conversation_history"].append({"role":"user", "content": user_query})
 
     # Build LLM messages (injects system prompt + intent_state)
-    messages = prepare_llm_payload(session["conversation_history"], mode="chat")
+    messages = prepare_llm_payload(session["conversation_history"])
 
     # Get LLM response
     llm_answer = generate_llm_response(messages)
